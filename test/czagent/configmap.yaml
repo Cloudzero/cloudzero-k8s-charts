@@ -1,0 +1,23 @@
+---
+# Source: cloudzero-cloudwatch-metrics/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudzero-cloudwatch-metrics
+  labels:
+    helm.sh/chart: cloudzero-cloudwatch-metrics-0.0.8
+    app.kubernetes.io/name: cloudzero-cloudwatch-metrics
+    app.kubernetes.io/managed-by: Helm
+data:
+  cwagentconfig.json: |
+    {
+      "logs": {
+        "metrics_collected": {
+          "kubernetes": {
+            "cluster_name": "cluster_name",
+            "metrics_collection_interval": 60
+          }
+        },
+        "force_flush_interval": 5
+      }
+    }

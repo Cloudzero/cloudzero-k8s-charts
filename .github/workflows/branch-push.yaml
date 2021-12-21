@@ -1,0 +1,9 @@
+name: Branch Push validations
+on: [push]
+jobs:
+  verify-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./scripts/install-toolchain.sh
+      - run: make all
