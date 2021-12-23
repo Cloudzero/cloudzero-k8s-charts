@@ -6,9 +6,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./scripts/install-toolchain.sh
-      - run: |
-          git fetch --prune --unshallow --tags
-          echo exit code $?
-          git tag --list
-          git log --graph --decorate --pretty=oneline --abbrev-commit
+      - run: git fetch --prune --unshallow --tags
       - run: make all
