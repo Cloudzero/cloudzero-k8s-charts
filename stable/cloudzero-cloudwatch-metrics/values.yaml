@@ -8,7 +8,7 @@ clusterName: cluster_name
 resources:
   limits:
     cpu: 100m
-    memory: 200Mi
+    memory: 300Mi
   requests:
     cpu: 50m
     memory: 50Mi
@@ -24,3 +24,18 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+annotations: {}
+
+agentConfig: |
+  {
+    "logs": {
+      "metrics_collected": {
+        "kubernetes": {
+          "cluster_name": "{{ .Values.clusterName }}",
+          "metrics_collection_interval": 60
+        }
+      },
+      "force_flush_interval": 5
+    }
+  }

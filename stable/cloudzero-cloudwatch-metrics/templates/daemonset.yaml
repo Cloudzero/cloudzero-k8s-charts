@@ -8,14 +8,14 @@ spec:
   selector:
     matchLabels:
       {{- include "cloudzero-cloudwatch-metrics.selectorLabels" . | nindent 6 }}
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
   template:
     metadata:
       labels:
         {{- include "cloudzero-cloudwatch-metrics.selectorLabels" . | nindent 8 }}
+        {{- if .Values.annotations }}
+         annotations:
+           {{- toYaml .Values.annotations | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ include "cloudzero-cloudwatch-metrics.serviceAccountName" . }}
       hostNetwork: {{ .Values.hostNetwork }}
@@ -86,3 +86,15 @@ spec:
         hostPath:
           path: /dev/disk/
       terminationGracePeriodSeconds: 60
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

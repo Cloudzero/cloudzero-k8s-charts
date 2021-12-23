@@ -34,9 +34,12 @@ helm upgrade --install cloudzero-cloudwatch-metrics           \
 | Parameter | Description | Default | Required |
 | - | - | - | -
 | `image.repository` | Image to deploy | `cloudzero/cloudwatch-agent` | ✔
-| `image.tag` | Image tag to deploy | `1.247349.0`
+| `image.tag` | Image tag to deploy | `cz-cloudwatchagent-0853e59.1`
 | `image.pullPolicy` | Pull policy for the image | `IfNotPresent` | ✔
 | `clusterName` | Name of your cluster | `cluster_name` | ✔
-| `serviceAccount.create` | Whether a new service account should be created | `true` |
-| `serviceAccount.name` | Service account to be used | |
-| `hostNetwork` | Allow to use the network namespace and network resources of the node | `true` |
+| `serviceAccount.create` | Whether a new service account should be created | `true` | 
+| `serviceAccount.name` | Service account to be used | | 
+| `hostNetwork` | Allow to use the network namespace and network resources of the node | `true` | 
+| `nodeSelector` | Node labels for pod assignment	 | {} | 
+| `tolerations` | Optional deployment tolerations	 | {} | 
+| `annotations` | Optional pod annotations	 | {} | 
