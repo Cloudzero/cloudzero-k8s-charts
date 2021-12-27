@@ -56,7 +56,7 @@ echo "## Changes"  | tee -a "${RELEASE_NOTES}"
 for chart in "${CHANGED_CHARTS[@]}"; do
     echo "- [${chart}]" | tee -a "${RELEASE_NOTES}"
     for change in $(git rev-list $LAST_RELEASE_HASH..HEAD ${chart}); do
-        one_line_msg=$(git --no-pager log --pretty='%s (thanks to %an)'  "${change}" -n1 |  sed 's/^\[.*\]//' | xargs)
+        one_line_msg=$(git --no-pager log --pretty='%s (thanks to %an)'  "${change}" -n1 | tr -d \' |  sed 's/^\[.*\]//' )
         echo "  - ${one_line_msg}" | tee -a "${RELEASE_NOTES}"
     done
 done
