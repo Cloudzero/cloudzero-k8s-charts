@@ -4,7 +4,7 @@
 Add the CloudZero repository to Helm:
 
 ```sh
-helm repo add cloudzero https://cloudzero.github.io/provision-account
+helm repo add cloudzero https://cloudzero.github.io/cloudzero-k8s-charts
 ```
 
 ### CloudZero CloudWatch Metrics

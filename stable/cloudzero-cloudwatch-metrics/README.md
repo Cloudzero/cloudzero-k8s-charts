@@ -7,7 +7,7 @@ A helm chart for collecting performance metrics down to the pod level.  CloudZer
 Add the CloudZero repository to Helm:
 
 ```sh
-helm repo add cloudzero https://cloudzero.github.io/provision-account
+helm repo add cloudzero https://cloudzero.github.io/cloudzero-k8s-charts
 ```
 
 ### Prerequisite
@@ -37,9 +37,9 @@ helm upgrade --install cloudzero-cloudwatch-metrics           \
 | `image.tag` | Image tag to deploy | `cz-cloudwatchagent-0853e59.1`
 | `image.pullPolicy` | Pull policy for the image | `IfNotPresent` | ✔
 | `clusterName` | Name of your cluster | `cluster_name` | ✔
-| `serviceAccount.create` | Whether a new service account should be created | `true` | 
-| `serviceAccount.name` | Service account to be used | | 
-| `hostNetwork` | Allow to use the network namespace and network resources of the node | `true` | 
-| `nodeSelector` | Node labels for pod assignment	 | {} | 
-| `tolerations` | Optional deployment tolerations	 | {} | 
-| `annotations` | Optional pod annotations	 | {} | 
+| `serviceAccount.create` | Whether a new service account should be created | `true` |
+| `serviceAccount.name` | Service account to be used | |
+| `hostNetwork` | Allow to use the network namespace and network resources of the node | `true` |
+| `nodeSelector` | Node labels for pod assignment | {} |
+| `tolerations` | Optional deployment tolerations | {} |
+| `annotations` | Optional pod annotations | {} |
