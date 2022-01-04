@@ -7,7 +7,7 @@ appVersion: "cz-cloudwatchagent-0853e59.1"
 home: https://cloudzero.github.io/cloudzero-k8s-charts/
 icon: https://raw.githubusercontent.com/cloudzero/cloudzero-k8s-charts/docs/logo/cloudZerologo.png
 sources:
-- https://github.com/cloudzero/provision-account
+- https://github.com/cloudzero/cloudzero-k8s-charts
 keywords:
 - kubernetes
 - eks
