@@ -8,7 +8,7 @@ STABLE="${GIT_REPO_ROOT}/stable"
 PACKAGE_DIR="${GIT_REPO_ROOT}/build"
 export PATH="${TOOLS_DIR}:${PATH}"
 
-if [[ ${GITHUB_ACTIONS} = "true" ]]; then
+if [[ -v GITHUB_ACTIONS && ${GITHUB_ACTIONS} = "true" ]]; then
     REPOSITORY="https://eks-bot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
     git config user.email eks-bot@users.noreply.github.com
     git config user.name eks-bot
