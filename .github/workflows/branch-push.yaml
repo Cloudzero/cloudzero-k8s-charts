@@ -17,7 +17,6 @@ jobs:
 
       - name: get fetch to update tags locally
         run: git fetch --prune --unshallow --tags
-        if: ${{ git rev-parse --is-shallow-repository }}
 
       - name: verify the release 
         run: make all
