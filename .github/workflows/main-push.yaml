@@ -26,4 +26,4 @@ jobs:
         run: ./scripts/package-charts.sh
 
       - name: Publish Charts
-        run: ./script/publish-charts.sh
+        run: ./scripts/publish-charts.sh
