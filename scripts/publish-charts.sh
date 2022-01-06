@@ -8,7 +8,7 @@ STABLE="${GIT_REPO_ROOT}/stable"
 PACKAGE_DIR="${GIT_REPO_ROOT}/build"
 export PATH="${TOOLS_DIR}:${PATH}"
 
-if echo "${CIRCLE_TAG}" | grep -Eq "^v[0-9]+(\.[0-9]+){2}$"; then
+if [[ -v GITHUB_ACTIONS && ${GITHUB_ACTIONS} = "true" ]]; then
     REPOSITORY="https://eks-bot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
     git config user.email eks-bot@users.noreply.github.com
     git config user.name eks-bot
@@ -17,11 +17,11 @@ if echo "${CIRCLE_TAG}" | grep -Eq "^v[0-9]+(\.[0-9]+){2}$"; then
     mv -f $PACKAGE_DIR/stable/*.tgz .
     helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
     git add .
-    git commit -m "Publish stable charts ${CIRCLE_TAG}"
+    git commit -m "Publish stable charts ${GITHUB_RUN_NUMBER}"
     git push origin gh-pages
     echo "✅ Published charts"
 else
-    echo "Not a valid semver release tag! Skip charts publish"
+    echo "not running in GitHub actions Skip charts publish"
     # Need to exit 0 here since circle ci runs this everytime
     exit 0
 fi
