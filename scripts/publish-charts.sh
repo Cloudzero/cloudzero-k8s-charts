@@ -9,12 +9,12 @@ PACKAGE_DIR="${GIT_REPO_ROOT}/build"
 export PATH="${TOOLS_DIR}:${PATH}"
 
 if [[ -v GITHUB_ACTIONS && ${GITHUB_ACTIONS} = "true" ]]; then
-    REPOSITORY="https://eks-bot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
-    git config user.email eks-bot@users.noreply.github.com
-    git config user.name eks-bot
+    REPOSITORY="https://cz-bot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
+    git config user.email cz-bot@users.noreply.github.com
+    git config user.name cz-bot
     git remote set-url origin ${REPOSITORY}
     git checkout gh-pages
-    mv -f $PACKAGE_DIR/stable/*.tgz .
+    cp $PACKAGE_DIR/stable/*.tgz .
     helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
     git add .
     git commit -m "Publish stable charts ${GITHUB_RUN_NUMBER}"

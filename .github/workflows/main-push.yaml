@@ -25,5 +25,27 @@ jobs:
       - name: Package release
         run: ./scripts/package-charts.sh
 
-      - name: Publish Charts
+      - name: Publish Charts to repository (gh-pages)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
         run: ./scripts/publish-charts.sh
+          
+      - name: Bump version and push tag
+        id: bump
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+          TAG_CONTEXT: repo
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: ./build/release-notes.md
+          files: ./build/stable/*.tgz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_RUN_NUMBER: release_V${{ env.GITHUB_RUN_NUMBER }}
+
