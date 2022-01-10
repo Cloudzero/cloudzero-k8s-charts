@@ -9,7 +9,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     env:
-      PUBLISH_DIR: build/stable"
+      PUBLISH_DIR: build/stable
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -30,7 +30,9 @@ jobs:
         run: ./scripts/package-charts.sh
 
       - name: list
-        run: find build -print
+        run: |
+         env
+         find build -print
 
       - name: Index chart create
         env:
