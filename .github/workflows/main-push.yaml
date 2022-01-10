@@ -42,7 +42,7 @@ jobs:
 
       - name: list
         run: |
-          find . -depth 1 -print
+          find . -depth 1 
           find build -print
 
       - name: Prep for Deploy to gh-pages
