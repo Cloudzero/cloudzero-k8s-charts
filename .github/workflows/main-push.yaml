@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+    env:
+      PUBLISH_DIR: build/gh-pages/"
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -36,7 +38,7 @@ jobs:
 
       - name: Prep for Deploy to gh-pages
         run: |
-          echo "PUBLISH_DIR=build/gh-pages/" >> $GITHUB_ENV
+          echo publish dir is  ${{ env.PUBLISH_DIR }}
           mkdir -p ${{ env.PUBLISH_DIR }}
           cp build/stable/*.tgz ${{ env.PUBLISH_DIR }}
           ls ${{ env.PUBLISH_DIR }}
