@@ -9,7 +9,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     env:
-      PUBLISH_DIR: build/gh-pages/"
+      PUBLISH_DIR: build/stable"
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -38,21 +38,13 @@ jobs:
           GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
         run: |
           helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
-          cp index* build/stable
+          cp index* ${{ env.PUBLISH_DIR }}
 
       - name: list
-        run: |
-          find . -print
-
-      - name: Prep for Deploy to gh-pages
-        run: |
-          echo publish dir is  ${{ env.PUBLISH_DIR }}
-          mkdir -p ${{ env.PUBLISH_DIR }}
-          cp build/stable/*.tgz ${{ env.PUBLISH_DIR }}
-          ls ${{ env.PUBLISH_DIR }}
+        run: find build -print
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ env.PUBLISH_DIR }} 
+          publish_dir: ${{ env.PUBLISH_DIR }}
