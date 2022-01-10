@@ -29,12 +29,18 @@ jobs:
       - name: Package release
         run: ./scripts/package-charts.sh
 
+      - name: list
+        run: find build -print
+
       - name: Index chart create
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
         run: |
           helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
+
+      - name: list
+        run: find build -print
 
       - name: Prep for Deploy to gh-pages
         run: |
