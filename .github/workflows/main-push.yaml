@@ -2,10 +2,12 @@ name: Main Push Continuous Deployment
 on:
   push:
     branches:
-      - main
+      - action-gh-pages
 jobs:
   Deployment:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -25,27 +27,22 @@ jobs:
       - name: Package release
         run: ./scripts/package-charts.sh
 
-      - name: Publish Charts to repository (gh-pages)
+      - name: Index chart create
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
-        run: ./scripts/publish-charts.sh
-          
-      - name: Bump version and push tag
-        id: bump
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          DEFAULT_BUMP: patch
-          TAG_CONTEXT: repo
+        run: |
+          helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - name: Prep for Deploy to gh-pages
+        run: |
+          echo "PUBLISH_DIR=build/gh-pages/" >> $GITHUB_ENV
+          mkdir -p ${{ env.PUBLISH_DIR }}
+          cp build/stable/*.tgz ${{ env.PUBLISH_DIR }}
+          ls ${{ env.PUBLISH_DIR }}
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          body_path: ./build/release-notes.md
-          files: ./build/stable/*.tgz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_RUN_NUMBER: release_V${{ env.GITHUB_RUN_NUMBER }}
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ env.PUBLISH_DIR }} 
