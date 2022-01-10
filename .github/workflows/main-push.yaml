@@ -38,9 +38,12 @@ jobs:
           GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
         run: |
           helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
+          cp index* build/stable
 
       - name: list
-        run: find build -print
+        run: |
+          find . -depth 1 -print
+          find build -print
 
       - name: Prep for Deploy to gh-pages
         run: |
