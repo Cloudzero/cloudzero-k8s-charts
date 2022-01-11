@@ -23,8 +23,18 @@ jobs:
           echo "LAST_TAG=${LAST_TAG}"
           echo "LAST_TAG=${LAST_TAG}" >> $GITHUB_ENV
 
-      - name: previous tag
-        run: echo ${{ env.LAST_TAG }}
+      - name: set up semver
+        uses: madhead/semver-utils@latest
+        id: version
+        with:
+          # A version to work with
+          version: ${{ env.LAST_TAG }}
+
+      - name: Get NEXT_TAG value
+        run: |
+          NEXT_TAG=${{ steps.version.outputs.inc-patch }}
+          echo "NEXT_TAG=${NEXT_TAG}"
+          echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
 
       - name: installing tool chain
         run: ./scripts/install-toolchain.sh
@@ -36,26 +46,28 @@ jobs:
         run: ./scripts/draft-release.sh
 
       - name: Package release
-        run: |
-          ./scripts/package-charts.sh
-          echo generate index
-          helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
-          cp index.yaml ${{ env.PUBLISH_DIR }} 
+        run: ./scripts/package-charts.sh
 
       - name: list
         run: |
          find build -print
          env | grep PUB
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ env.PUBLISH_DIR }}
-          keep_files: true
-
+          body_path: build/release-notes.md
+          files: build/stable/*.tgz
+          tag_name: v${{ env.NEXT_TAG }}
+          tag_name: v${{ env.NEXT_TAG }}
+            
       - name: list
         run: |
          find build -print
+
+      - name: Package release
+        run: ./scripts/publish-charts.sh
 
 
