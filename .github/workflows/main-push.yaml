@@ -38,7 +38,9 @@ jobs:
       - name: Package release
         run: |
           ./scripts/package-charts.sh
+          echo generate index
           helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
+          cp index.yaml ${{ env.PUBLISH_DIR }} 
 
       - name: list
         run: |
