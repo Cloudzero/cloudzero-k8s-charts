@@ -60,7 +60,7 @@ jobs:
         with:
           body_path: build/release-notes.md
           files: build/stable/*.tgz
-          tag_name: v${{ env.NEXT_TAG }}
+          name: V${{ env.NEXT_TAG }}
           tag_name: v${{ env.NEXT_TAG }}
             
       - name: list
