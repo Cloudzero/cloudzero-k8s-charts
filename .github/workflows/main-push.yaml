@@ -38,9 +38,9 @@ jobs:
       - name: Package release
         run: |
           ./scripts/package-charts.sh
+          helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
 
       - name: list
         run: |
-         env
          find build -print
 
