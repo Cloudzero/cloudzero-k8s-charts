@@ -2,14 +2,12 @@ name: Main Push Continuous Deployment
 on:
   push:
     branches:
-      - action-gh-pages
+      - main
 jobs:
   Deployment:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-    env:
-      PUBLISH_DIR: build/stable/
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -48,11 +46,6 @@ jobs:
       - name: Package release
         run: ./scripts/package-charts.sh
 
-      - name: list
-        run: |
-         find build -print
-         env | grep PUB
-
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
@@ -63,14 +56,9 @@ jobs:
           name: V${{ env.NEXT_TAG }}
           tag_name: v${{ env.NEXT_TAG }}
             
-      - name: list
-        run: |
-         find build -print
-
       - name: Package release
         env:
           GITHUB_ACTIONS: ${{ env.GITHUB_ACTIONS }}
           GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
         run: ./scripts/publish-charts.sh
-
 
