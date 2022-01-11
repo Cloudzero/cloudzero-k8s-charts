@@ -14,7 +14,7 @@ if [[ -v GITHUB_ACTIONS && ${GITHUB_ACTIONS} = "true" ]]; then
     git config user.name cz-bot
     git remote set-url origin ${REPOSITORY}
     git checkout gh-pages
-    cp $PACKAGE_DIR/stable/*.tgz .
+    mv $PACKAGE_DIR/stable/*.tgz .
     helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
     git add .
     git commit -m "Publish stable charts ${GITHUB_RUN_NUMBER}"
