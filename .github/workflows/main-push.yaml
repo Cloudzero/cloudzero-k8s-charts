@@ -9,7 +9,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     env:
-      PUBLISH_DIR: build/stable
+      PUBLISH_DIR: build/stable/
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -45,13 +45,14 @@ jobs:
       - name: list
         run: |
          find build -print
+         env | grep PUB
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ env.PUBLISH_DIR }}
-          exclude_assets: '.nojekyll,LICENSE,README.md,index.yaml,*.tgz'
+          keep_files: true
 
       - name: list
         run: |
