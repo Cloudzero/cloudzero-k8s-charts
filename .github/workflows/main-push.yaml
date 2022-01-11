@@ -14,6 +14,15 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
+      - name: last tag
+        run: |
+          LAST_TAG=$(git describe HEAD --tags | grep -Eo "^v[0-9]+(\.[0-9]+)*")
+          echo "LAST_TAG=${LAST_TAG}"
+          echo "LAST_TAG=${LAST_TAG}" >> $GITHUB_ENV
+
+      - name: previous tag
+        run: echo ${{ env.LAST_TAG }}
+
       - name: installing tool chain
         run: ./scripts/install-toolchain.sh
 
@@ -27,26 +36,12 @@ jobs:
         run: ./scripts/draft-release.sh
 
       - name: Package release
-        run: ./scripts/package-charts.sh
+        run: |
+          ./scripts/package-charts.sh
+          cp index.yaml build/stable/
 
       - name: list
         run: |
          env
          find build -print
 
-      - name: Index chart create
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
-        run: |
-          helm repo index . --url https://cloudzero.github.io/cloudzero-k8s-charts/
-          cp index* ${{ env.PUBLISH_DIR }}
-
-      - name: list
-        run: find build -print
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ env.PUBLISH_DIR }}
