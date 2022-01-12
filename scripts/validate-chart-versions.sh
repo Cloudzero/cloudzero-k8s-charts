@@ -30,8 +30,8 @@ for d in */; do
     echo "✅ Chart $d had no changes since the last eks-charts release"
     continue
     fi
-    LAST_RELEASE_CHART_VERSION=$(git --no-pager show $LAST_RELEASE_HASH:helm-charts/stable/"$d"Chart.yaml | grep 'version:' | xargs | cut -d' ' -f2 | tr -d '[:space:]')
-    LAST_COMMIT_CHART_VERSION=$(git --no-pager show $LAST_COMMIT_HASH:helm-charts/stable/"$d"Chart.yaml | grep 'version:' | xargs | cut -d' ' -f2 | tr -d '[:space:]')
+    LAST_RELEASE_CHART_VERSION=$(git --no-pager show $LAST_RELEASE_HASH:stable/"$d"Chart.yaml | grep 'version:' | xargs | cut -d' ' -f2 | tr -d '[:space:]')
+    LAST_COMMIT_CHART_VERSION=$(git --no-pager show $LAST_COMMIT_HASH:stable/"$d"Chart.yaml | grep 'version:' | xargs | cut -d' ' -f2 | tr -d '[:space:]')
     if [[ $LAST_RELEASE_CHART_VERSION == $LAST_COMMIT_CHART_VERSION ]]; then
     echo "❌ Chart $d has the same Chart version as the last release $LAST_COMMIT_CHART_VERSION"
     EXIT_CODE=1

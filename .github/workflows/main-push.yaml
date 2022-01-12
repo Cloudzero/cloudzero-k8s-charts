@@ -6,15 +6,36 @@ on:
 jobs:
   Deployment:
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: installing tool chain
-        run: ./scripts/install-toolchain.sh
-
       - name: get fetch to update tags locally
         run: git fetch --prune --unshallow --tags
+
+      - name: last tag
+        run: |
+          LAST_TAG=$(git describe HEAD --tags | grep -Eo "^v[0-9]+(\.[0-9]+)*")
+          echo "LAST_TAG=${LAST_TAG}"
+          echo "LAST_TAG=${LAST_TAG}" >> $GITHUB_ENV
+
+      - name: set up semver
+        uses: madhead/semver-utils@latest
+        id: version
+        with:
+          # A version to work with
+          version: ${{ env.LAST_TAG }}
+
+      - name: Get NEXT_TAG value
+        run: |
+          NEXT_TAG=${{ steps.version.outputs.inc-patch }}
+          echo "NEXT_TAG=${NEXT_TAG}"
+          echo "NEXT_TAG=${NEXT_TAG}" >> $GITHUB_ENV
+
+      - name: installing tool chain
+        run: ./scripts/install-toolchain.sh
 
       - name: verify the release one more time.
         run: make all
@@ -25,27 +46,19 @@ jobs:
       - name: Package release
         run: ./scripts/package-charts.sh
 
-      - name: Publish Charts to repository (gh-pages)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTIONS: ${{ secrets.GITHUB_ACTIONS }}
-        run: ./scripts/publish-charts.sh
-          
-      - name: Bump version and push tag
-        id: bump
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          DEFAULT_BUMP: patch
-          TAG_CONTEXT: repo
-
       - name: Release
         uses: softprops/action-gh-release@v1
-        with:
-          body_path: ./build/release-notes.md
-          files: ./build/stable/*.tgz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_RUN_NUMBER: release_V${{ env.GITHUB_RUN_NUMBER }}
+        with:
+          body_path: build/release-notes.md
+          files: build/stable/*.tgz
+          name: V${{ env.NEXT_TAG }}
+          tag_name: v${{ env.NEXT_TAG }}
+            
+      - name: Package release
+        env:
+          GITHUB_ACTIONS: ${{ env.GITHUB_ACTIONS }}
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        run: ./scripts/publish-charts.sh
 
