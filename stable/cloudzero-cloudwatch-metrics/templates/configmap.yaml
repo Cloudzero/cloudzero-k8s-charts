@@ -6,4 +6,18 @@ metadata:
     {{- include "cloudzero-cloudwatch-metrics.labels" . | nindent 4 }}
 data:
   cwagentconfig.json: |
-{{ .Values.agentConfig | indent 4 }}
+{{- if .Values.agentConfig }}
+{{ .Values.agentConfig }} | nident 2}}
+{{ else }}
+    {
+      "logs": {
+        "metrics_collected": {
+          "kubernetes": {
+            "cluster_name": "{{ .Values.clusterName }}",
+            "metrics_collection_interval": 60
+          }
+        },
+        "force_flush_interval": 5
+      }
+    }
+{{- end }}
