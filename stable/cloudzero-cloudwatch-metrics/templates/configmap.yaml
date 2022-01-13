@@ -6,9 +6,9 @@ metadata:
     {{- include "cloudzero-cloudwatch-metrics.labels" . | nindent 4 }}
 data:
   cwagentconfig.json: |
-{{- if .Values.agentConfig }}
-{{ .Values.agentConfig }} | nident 2}}
-{{ else }}
+    {{- if .Values.agentConfig }}
+    {{- tpl .Values.agentConfig . | nindent 4 }}
+    {{- else }}
     {
       "logs": {
         "metrics_collected": {
@@ -20,4 +20,5 @@ data:
         "force_flush_interval": 5
       }
     }
-{{- end }}
+    {{- end }}
+
