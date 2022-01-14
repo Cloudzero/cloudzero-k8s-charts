@@ -26,3 +26,5 @@ tolerations: []
 affinity: {}
 
 annotations: {}
+
+agentConfig: {}
