@@ -9,9 +9,9 @@ PACKAGE_DIR="${GIT_REPO_ROOT}/build"
 export PATH="${TOOLS_DIR}:${PATH}"
 
 if echo "${CIRCLE_TAG}" | grep -Eq "^v[0-9]+(\.[0-9]+){2}$"; then
-    REPOSITORY="https://eks-bot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
-    git config user.email eks-bot@users.noreply.github.com
-    git config user.name eks-bot
+    REPOSITORY="https://CloudZeroBot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
+    git config user.email ops@cloudzero.com
+    git config user.name CloudZeroBot
     git remote set-url origin ${REPOSITORY}
     git checkout gh-pages
     mv -f $PACKAGE_DIR/stable/*.tgz .
