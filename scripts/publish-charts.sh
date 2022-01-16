@@ -10,8 +10,8 @@ export PATH="${TOOLS_DIR}:${PATH}"
 
 if [[ -v GITHUB_ACTIONS && ${GITHUB_ACTIONS} = "true" ]]; then
     REPOSITORY="https://cz-bot:${GITHUB_TOKEN}@github.com/cloudzero/cloudzero-k8s-charts.git"
-    git config user.email cz-bot@users.noreply.github.com
-    git config user.name cz-bot
+    git config user.email ops@cloudzero.com
+    git config user.name CloudZeroBot
     git remote set-url origin ${REPOSITORY}
     git checkout gh-pages
     mv $PACKAGE_DIR/stable/*.tgz .
