@@ -19,6 +19,9 @@ spec:
     spec:
       serviceAccountName: {{ include "cloudzero-cloudwatch-metrics.serviceAccountName" . }}
       hostNetwork: {{ .Values.hostNetwork }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
