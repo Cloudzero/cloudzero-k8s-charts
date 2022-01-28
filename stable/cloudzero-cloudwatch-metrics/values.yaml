@@ -27,4 +27,6 @@ affinity: {}
 
 annotations: {}
 
+priorityClassName:
+
 agentConfig: {}
