@@ -48,6 +48,9 @@ Selector labels
 */}}
 {{- define "cloudzero-cloudwatch-metrics.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "cloudzero-cloudwatch-metrics.name" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
 {{- end -}}
 
 {{/*

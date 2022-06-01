@@ -1,3 +1,10 @@
+
 {{ .Release.Name }} has been installed or updated. To check the status of pods, run:
 
 kubectl get pods -l app.kubernetes.io/name: {{ include "cloudzero-cloudwatch-metrics.name" . }}
+
+
+To validate the pods are publishing to CloudWatch Logs, run: (wait 10 minuites)
+
+aws logs describe-log-groups | grep {{ .Values.clusterName }}
+
