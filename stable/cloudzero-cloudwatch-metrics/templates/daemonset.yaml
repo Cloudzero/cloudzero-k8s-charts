@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+  name: {{ include "cloudzero-agent.fullname" . }}
   labels:
-    {{- include "cloudzero-cloudwatch-metrics.labels" . | nindent 4 }}
+    {{- include "cloudzero-agent.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "cloudzero-cloudwatch-metrics.selectorLabels" . | nindent 6 }}
+      {{- include "cloudzero-agent.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "cloudzero-cloudwatch-metrics.selectorLabels" . | nindent 8 }}
+        {{- include "cloudzero-agent.selectorLabels" . | nindent 8 }}
       {{- if .Values.annotations }}
       annotations:
         {{- toYaml .Values.annotations | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{ include "cloudzero-cloudwatch-metrics.serviceAccountName" . }}
+      serviceAccountName: {{ include "cloudzero-agent.serviceAccountName" . }}
       hostNetwork: {{ .Values.hostNetwork }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
@@ -69,7 +69,7 @@ spec:
       volumes:
       - name: cwagentconfig
         configMap:
-          name: {{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+          name: {{ include "cloudzero-agent.fullname" . }}
       - name: rootfs
         hostPath:
           path: /

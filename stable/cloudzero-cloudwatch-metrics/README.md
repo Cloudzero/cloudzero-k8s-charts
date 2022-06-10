@@ -1,4 +1,4 @@
-# CloudZero Container Metrics
+# CloudZero Agnet
 
 A helm chart for collecting performance metrics down to the pod level.  CloudZero uses this data to calculate container cost to the pod, label, namespace, or Cluster level.  See our documentation [here](https://docs.cloudzero.com/docs/container-cost-track).
 
@@ -21,8 +21,8 @@ The agent consumes cpu and memory in relation to your cluster density. The densi
 Install the latest version
 
 ```sh
-helm upgrade --install cloudzero-cloudwatch-metrics           \
-             cloudzero/cloudzero-cloudwatch-metrics           \
+helm upgrade --install cloudzero-agent           \
+             cloudzero/cloudzero-agent           \
              --namespace cloudzero-metrics --create-namespace \
              --set clusterName=<Your Cluster>
 ```
@@ -34,7 +34,7 @@ helm upgrade --install cloudzero-cloudwatch-metrics           \
 | Parameter | Description | Default | Required |
 | - | - | - | -
 | `image.repository` | Image to deploy | `cloudzero/cloudwatch-agent` | ✔
-| `image.tag` | Image tag to deploy | `cz-cloudwatchagent-0853e59.1`
+| `image.tag` | Image tag to deploy | `0.0.11`
 | `image.pullPolicy` | Pull policy for the image | `IfNotPresent` | ✔
 | `clusterName` | Name of your cluster | `cluster_name` | ✔
 | `serviceAccount.create` | Whether a new service account should be created | `true` |
