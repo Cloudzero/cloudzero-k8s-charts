@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "cloudzero-cloudwatch-metrics.selectorLabels" . | nindent 8 }}
+        {{- include "cloudzero-cloudwatch-metrics.labels" . | nindent 8 }}
       {{- if .Values.annotations }}
       annotations:
         {{- toYaml .Values.annotations | nindent 8 }}
