@@ -41,7 +41,7 @@ helm.sh/chart: {{ include "cloudzero-cloudwatch-metrics.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-cloudzero.com/agent: {{ printf "%s:%s" .Values.image.repository .Values.image.tag | replace "/" "-" | replace ":" "_" | quote }}
+cloudzero.com/agent: {{ printf "%s:%s" .Values.image.repository .Values.image.tag | replace "/" "-" | replace ":" "_" | trunc -63 | quote }}
 {{- end -}}
 
 {{/*
