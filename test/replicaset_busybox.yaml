@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replicaset-dontdelete
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: my-replicaset-app-test-1
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: my-replicaset-app-test-1
+    spec:
+      containers:
+      - image: busybox
+        command:
+          - sleep
+          - "3600"
+        imagePullPolicy: IfNotPresent
+        name: busybox

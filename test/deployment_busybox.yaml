@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-test-1
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: deployment-test-1
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: deployment-test-1
+    spec:
+      containers:
+      - image: busybox
+        command:
+          - sleep
+          - "3600"
+        imagePullPolicy: IfNotPresent
+        name: busybox
