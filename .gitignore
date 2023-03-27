@@ -15,6 +15,7 @@
 bin/
 _tmp/
 build/
+.vscode/
 
 .idea
 *.iml

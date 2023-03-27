@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/cloudzero/cloudzero-agent
-  tag: 0.0.12
+  tag: 0.0.13
   pullPolicy: IfNotPresent
 
 clusterName: cluster_name
@@ -36,3 +36,13 @@ priorityClassName:
 agentConfig: {}
 
 imagePullSecrets: []
+
+# Additional labels to add to the pods:
+# podLabels:
+#   key: value
+podLabels: {}
+
+# Additional labels to add to the DaemonSet:
+# daemonsetLabels:
+#   key: value
+daemonsetLabels: {}
