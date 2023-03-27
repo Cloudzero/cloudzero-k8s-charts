@@ -26,10 +26,16 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      terminationGracePeriodSeconds: 240
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          runAsUser: 0  # root
+          capabilities:
+            add: ["ALL"]
+          readOnlyRootFilesystem: false
         # Please don't change below envs
         env:
         - name: HOST_IP

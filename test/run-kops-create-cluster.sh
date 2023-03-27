@@ -5,7 +5,7 @@
 set -o errexit
 
 
-kops create cluster --name=tempk8s-cluster.k8s.local \
+kops create cluster --name=temp-k8s-cluster.k8s.local \
   --state=s3://cz-kops-base \
   --cloud=aws \
   --vpc=vpc-d4b483af \
@@ -14,9 +14,9 @@ kops create cluster --name=tempk8s-cluster.k8s.local \
   --master-count=3 \
   --master-size=c5.2xlarge \
   --node-count=3 \
-  --node-size=c5.xlarge \
+  --node-size=t3a.medium \
   --container-runtime=containerd \
-  --kubernetes-version="1.20.9" \
+  --kubernetes-version="1.24.3" \
   --authorization=RBAC \
   --networking=amazonvpc \
   --dry-run \

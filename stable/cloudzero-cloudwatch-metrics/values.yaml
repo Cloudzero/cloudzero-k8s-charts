@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/cloudzero/cloudzero-agent
   tag: 0.0.12
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 clusterName: cluster_name
 
@@ -18,6 +18,12 @@ serviceAccount:
   name:
 
 hostNetwork: true
+
+securityContext:
+  runAsUser: 0  # root
+  capabilities:
+    add: ["ALL"]
+  readOnlyRootFilesystem: false
 
 nodeSelector: {}
 

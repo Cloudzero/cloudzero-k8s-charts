@@ -17,6 +17,7 @@ _tmp/
 build/
 
 .idea
+.vscode/
 *.iml
 
 erase.yaml
