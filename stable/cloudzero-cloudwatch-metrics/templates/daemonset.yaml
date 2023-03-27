@@ -4,6 +4,9 @@ metadata:
   name: {{ include "cloudzero-cloudwatch-metrics.fullname" . }}
   labels:
     {{- include "cloudzero-cloudwatch-metrics.labels" . | nindent 4 }}
+{{- with .Values.daemonsetLabels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
 spec:
   selector:
     matchLabels:
@@ -12,6 +15,9 @@ spec:
     metadata:
       labels:
         {{- include "cloudzero-cloudwatch-metrics.labels" . | nindent 8 }}
+{{- with .Values.podLabels }}
+{{ toYaml . | indent 8 }}
+{{- end }}
       {{- if .Values.annotations }}
       annotations:
         {{- toYaml .Values.annotations | nindent 8 }}
