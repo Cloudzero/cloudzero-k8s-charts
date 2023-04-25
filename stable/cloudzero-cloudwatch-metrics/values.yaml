@@ -26,8 +26,11 @@ tolerations: []
 affinity: {}
 
 # For bottlerocket OS (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-troubleshooting.html#ContainerInsights-troubleshooting-bottlerocket)
-#containerdSockPath: /run/dockershim.sock
-containerdSockPath:
+# containerdSockPath: /run/dockershim.sock
+#
+# For OpenShift
+containerdSockPath: /var/run/crio/crio.sock
+# containerdSockPath:
 
 annotations: {}
 
@@ -46,3 +49,5 @@ podLabels: {}
 # daemonsetLabels:
 #   key: value
 daemonsetLabels: {}
+
+openshift: true
