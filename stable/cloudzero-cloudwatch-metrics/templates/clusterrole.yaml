@@ -27,7 +27,7 @@ metadata:
   name: {{ include "cloudzero-cloudwatch-metrics.fullname" . }}
 rules:
 - apiGroups: [""]
-  resources: ["pods", "nodes", "namespace", "endpoints", "resourcequotas", "pods/proxy", "nodes/proxy", "nodes/metrics" ]
+  resources: ["pods", "nodes", "endpoints", "resourcequotas", "pods/proxy", "nodes/proxy", "nodes/metrics" ]
   verbs: ["get", "list", "watch"]
 - apiGroups: ["apps"]
   resources: ["replicasets"]
