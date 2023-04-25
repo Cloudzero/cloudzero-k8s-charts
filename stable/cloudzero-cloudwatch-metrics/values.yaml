@@ -16,6 +16,10 @@ resources:
 serviceAccount:
   create: true
   name:
+  # for OpenShift, add the annotations eks.amazonaws.com/role-arn:
+  # this role allows the Pod to write to CloudWatch Logs to write metrics
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<123456789012>:role/<name> 
 
 hostNetwork: true
 
