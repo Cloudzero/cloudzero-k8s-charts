@@ -16,10 +16,11 @@ resources:
 serviceAccount:
   create: true
   name:
-  # for OpenShift, add the annotations eks.amazonaws.com/role-arn:
+  # For AWS ROSA (OpenShift)
+  # add the annotations eks.amazonaws.com/role-arn:
   # this role allows the Pod to write to CloudWatch Logs to write metrics
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::<123456789012>:role/<name> 
+  # annotations:
+  #  eks.amazonaws.com/role-arn: arn:aws:iam::<account>:role/<rolename>
 
 hostNetwork: true
 
@@ -33,8 +34,9 @@ affinity: {}
 # containerdSockPath: /run/dockershim.sock
 #
 # For OpenShift
-containerdSockPath: /var/run/crio/crio.sock
-# containerdSockPath:
+# For AWS ROSA (OpenShift)
+# containerdSockPath: /var/run/crio/crio.sock
+containerdSockPath:
 
 annotations: {}
 
@@ -54,4 +56,5 @@ podLabels: {}
 #   key: value
 daemonsetLabels: {}
 
-openshift: true
+# For AWS ROSA (OpenShift)
+#openshift: true
