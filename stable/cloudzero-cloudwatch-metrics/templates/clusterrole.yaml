@@ -1,3 +1,4 @@
+{{- if .Values.openshift }}
 apiVersion: security.openshift.io/v1
 kind: SecurityContextConstraints
 metadata:
@@ -18,6 +19,7 @@ fsGroup:
   type: RunAsAny
 users:
 - system:serviceaccount:{{ .Release.Namespace }}:{{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+{{ end }}
 
 ---
 
