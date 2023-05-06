@@ -1,20 +1,42 @@
+{{- if .Values.openshift }}
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  name: scc-{{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegedContainer: true
+allowPrivilegeEscalation: false
+readOnlyRootFilesystem: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: MustRunAs
+fsGroup:
+  type: RunAsAny
+users:
+- system:serviceaccount:{{ .Release.Namespace }}:{{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+{{ end }}
+
+---
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ include "cloudzero-cloudwatch-metrics.fullname" . }}
 rules:
 - apiGroups: [""]
-  resources: ["pods", "nodes", "endpoints"]
-  verbs: ["list", "watch"]
+  resources: ["pods", "nodes", "endpoints", "resourcequotas", "pods/proxy", "nodes/proxy", "nodes/metrics" ]
+  verbs: ["get", "list", "watch"]
 - apiGroups: ["apps"]
   resources: ["replicasets"]
-  verbs: ["list", "watch"]
+  verbs: ["get", "list", "watch"]
 - apiGroups: ["batch"]
   resources: ["jobs"]
-  verbs: ["list", "watch"]
-- apiGroups: [""]
-  resources: ["nodes/proxy"]
-  verbs: ["get"]
+  verbs: ["get", "list", "watch"]
 - apiGroups: [""]
   resources: ["nodes/stats", "configmaps", "events"]
   verbs: ["create"]
@@ -22,3 +44,15 @@ rules:
   resources: ["configmaps"]
   resourceNames: ["cwagent-clusterleader"]
   verbs: ["get","update"]
+{{- if .Values.openshift }}
+- apiGroups: ["security.openshift.io"]
+  resourceNames: ["scc-cloudzero-cloudwatch-metrics"]
+  resources: ["securitycontextconstraints"]
+  verbs: ["get"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
+- nonResourceURLs: ["/metrics", "/metrics/cadvisor"]
+  verbs: ["get"]
+{{ end }}
+ 

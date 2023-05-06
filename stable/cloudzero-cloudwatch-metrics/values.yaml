@@ -16,6 +16,11 @@ resources:
 serviceAccount:
   create: true
   name:
+  # For AWS ROSA (OpenShift)
+  # add the annotations eks.amazonaws.com/role-arn:
+  # this role allows the Pod to write to CloudWatch Logs to write metrics
+  # annotations:
+  #  eks.amazonaws.com/role-arn: arn:aws:iam::<account>:role/<rolename>
 
 hostNetwork: true
 
@@ -26,7 +31,11 @@ tolerations: []
 affinity: {}
 
 # For bottlerocket OS (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-troubleshooting.html#ContainerInsights-troubleshooting-bottlerocket)
-#containerdSockPath: /run/dockershim.sock
+# containerdSockPath: /run/dockershim.sock
+#
+# For OpenShift
+# For AWS ROSA (OpenShift)
+# containerdSockPath: /var/run/crio/crio.sock
 containerdSockPath:
 
 annotations: {}
@@ -46,3 +55,6 @@ podLabels: {}
 # daemonsetLabels:
 #   key: value
 daemonsetLabels: {}
+
+# For AWS ROSA (OpenShift)
+#openshift: true
