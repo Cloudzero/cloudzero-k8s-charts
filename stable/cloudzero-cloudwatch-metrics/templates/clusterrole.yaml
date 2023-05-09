@@ -2,7 +2,7 @@
 apiVersion: security.openshift.io/v1
 kind: SecurityContextConstraints
 metadata:
-  name: scc-{{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+  name: {{ include "cloudzero-cloudwatch-metrics.sccName" . }}
 allowHostDirVolumePlugin: true
 allowHostIPC: true
 allowHostNetwork: true
@@ -18,7 +18,7 @@ seLinuxContext:
 fsGroup:
   type: RunAsAny
 users:
-- system:serviceaccount:{{ .Release.Namespace }}:{{ include "cloudzero-cloudwatch-metrics.fullname" . }}
+- system:serviceaccount:{{ .Release.Namespace }}:{{ include "cloudzero-cloudwatch-metrics.serviceAccountName" . }}
 {{ end }}
 
 ---
@@ -46,7 +46,7 @@ rules:
   verbs: ["get","update"]
 {{- if .Values.openshift }}
 - apiGroups: ["security.openshift.io"]
-  resourceNames: ["scc-cloudzero-cloudwatch-metrics"]
+  resourceNames: [{{ include "cloudzero-cloudwatch-metrics.sccName" . | quote }}]
   resources: ["securitycontextconstraints"]
   verbs: ["get"]
 - apiGroups: ["networking.k8s.io"]

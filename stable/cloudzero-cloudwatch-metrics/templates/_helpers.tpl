@@ -57,3 +57,10 @@ Create the name of the service account to use
 {{- define "cloudzero-cloudwatch-metrics.serviceAccountName" -}}
   {{ default (include "cloudzero-cloudwatch-metrics.fullname" .) .Values.serviceAccount.name }}
 {{- end -}}
+
+{{/*
+Create the name of the OpenShift SecurityContextConstraints to use
+*/}}
+{{- define "cloudzero-cloudwatch-metrics.sccName" -}}
+{{- (printf "scc-%s" (include "cloudzero-cloudwatch-metrics.fullname" .)) }}
+{{- end -}}
