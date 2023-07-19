@@ -113,6 +113,9 @@ spec:
       type: Public
     masters: public
     nodes: public
+
+---
+
 apiVersion: kops.k8s.io/v1alpha2
 kind: InstanceGroup
 metadata:
