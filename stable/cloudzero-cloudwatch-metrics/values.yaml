@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/cloudzero/cloudzero-agent
-  tag: 0.0.13
+  tag: 0.0.14
   pullPolicy: IfNotPresent
 
 clusterName: cluster_name
@@ -13,9 +13,12 @@ resources:
     cpu: 50m
     memory: 50Mi
 
+trackReplicaSets: "true"
+
 serviceAccount:
   create: true
   name:
+
   # For AWS ROSA (OpenShift)
   # add the annotations eks.amazonaws.com/role-arn:
   # this role allows the Pod to write to CloudWatch Logs to write metrics
@@ -26,7 +29,10 @@ hostNetwork: true
 
 nodeSelector: {}
 
-tolerations: []
+tolerations:
+# Allow CloudZero agent to run on all nodes in case of a taint
+  - effect: NoSchedule
+    operator: Exists
 
 affinity: {}
 
