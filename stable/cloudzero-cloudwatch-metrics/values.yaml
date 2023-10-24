@@ -64,3 +64,14 @@ daemonsetLabels: {}
 
 # For AWS ROSA (OpenShift)
 #openshift: true
+
+# Define the securityContext block for all containers in the pod
+# securityContext:
+#   k: v
+podSecurityContext: {}
+
+# Define the securityContext for the cloudzero-agent container.
+# pod:
+#   securityContext:
+#     k: v
+securityContext: {}
