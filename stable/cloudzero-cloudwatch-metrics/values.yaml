@@ -64,3 +64,5 @@ daemonsetLabels: {}
 
 # For AWS ROSA (OpenShift)
 #openshift: true
+
+metricsCollectionInterval: 120
