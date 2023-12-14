@@ -43,3 +43,4 @@ helm upgrade --install cloudzero-cloudwatch-metrics           \
 | `nodeSelector` | Node labels for pod assignment | {} |
 | `tolerations` | Optional deployment tolerations | {} |
 | `annotations` | Optional pod annotations | {} |
+| `metricsCollectionInterval` | Metrics collection interval | 120 |
