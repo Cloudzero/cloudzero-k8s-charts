@@ -43,4 +43,4 @@ helm upgrade --install cloudzero-cloudwatch-metrics           \
 | `nodeSelector` | Node labels for pod assignment | {} |
 | `tolerations` | Optional deployment tolerations | {} |
 | `annotations` | Optional pod annotations | {} |
-| `metricsCollectionInterval` | Metrics collection interval in seconds | 120 |
+| `metricsCollectionInterval` | Metrics collection interval in seconds. It can be set to 5, 10, 15, 30, 45, 60 or 120 | 120 |
