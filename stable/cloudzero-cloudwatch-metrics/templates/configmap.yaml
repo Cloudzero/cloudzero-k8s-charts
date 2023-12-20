@@ -14,7 +14,13 @@ data:
         "metrics_collected": {
           "kubernetes": {
             "cluster_name": "{{ .Values.clusterName }}",
-            "metrics_collection_interval": 60
+            {{- $allowedIntervals := list 5 10 15 30 45 60 120 }}
+            {{- $failureMessage := printf "metricsCollectionInterval must be set to one of %s" (join "," $allowedIntervals) }}
+            {{- if not (has (int .Values.metricsCollectionInterval) $allowedIntervals) }}
+              {{- fail $failureMessage }}
+            {{- else }}
+            "metrics_collection_interval": {{ .Values.metricsCollectionInterval }}
+            {{- end }}
           }
         },
         "force_flush_interval": 5
