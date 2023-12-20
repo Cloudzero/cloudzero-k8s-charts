@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/cloudzero/cloudzero-agent
-  tag: 0.0.16
+  tag: 0.0.22
   pullPolicy: IfNotPresent
 
 clusterName: cluster_name
@@ -64,3 +64,5 @@ daemonsetLabels: {}
 
 # For AWS ROSA (OpenShift)
 #openshift: true
+
+metricsCollectionInterval: 120
