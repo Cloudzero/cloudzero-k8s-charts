@@ -1,6 +1,8 @@
 image:
   repository: ghcr.io/cloudzero/cloudzero-agent
+
   tag: 0.0.23
+
   pullPolicy: IfNotPresent
 
 clusterName: cluster_name
