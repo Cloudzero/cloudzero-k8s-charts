@@ -3,9 +3,9 @@ entries:
   cloudzero-cloudwatch-metrics:
   - apiVersion: v1
     appVersion: 0.0.23
-    created: "2024-02-05T22:38:46.424232727Z"
+    created: "2024-02-06T21:19:27.961396283Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
-    digest: 7393d46795129a2200b4db914b40d8b2895b43393fde650e71bfab0259fce020
+    digest: 70759aba799a4e749e1555a81b7079adeefffbf711c76fa4ccd5538b8c59d925
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
     icon: https://raw.githubusercontent.com/cloudzero/cloudzero-k8s-charts/docs/logo/cloudZerologo.png
     keywords:
@@ -23,7 +23,7 @@ entries:
     version: 0.0.28
   - apiVersion: v1
     appVersion: 0.0.22
-    created: "2024-02-05T22:38:46.42332372Z"
+    created: "2024-02-06T21:19:27.96105788Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: a897484c83d1e632048970c1815bb3b92d8407e39bce5f4393968704ccdf7898
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -43,7 +43,7 @@ entries:
     version: 0.0.27
   - apiVersion: v1
     appVersion: 0.0.16
-    created: "2024-02-05T22:38:46.422933104Z"
+    created: "2024-02-06T21:19:27.960664224Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: f7e6eae1494deedc8a8bbf20877014ac72335462bbce664229dfc2d926f3fba1
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -63,7 +63,7 @@ entries:
     version: 0.0.24
   - apiVersion: v1
     appVersion: 0.0.15
-    created: "2024-02-05T22:38:46.422606751Z"
+    created: "2024-02-06T21:19:27.959356637Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 402d3a8addbed6fd1629f8098c273808d739150e165982b03402945d6deb1dca
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -83,7 +83,7 @@ entries:
     version: 0.0.23
   - apiVersion: v1
     appVersion: 0.0.14
-    created: "2024-02-05T22:38:46.42228687Z"
+    created: "2024-02-06T21:19:27.959032009Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: b610161c4436ca59296c7d780c05db3059ecacc6807f09e474e4bc2422249752
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -103,7 +103,7 @@ entries:
     version: 0.0.22
   - apiVersion: v1
     appVersion: 0.0.13
-    created: "2024-02-05T22:38:46.421957301Z"
+    created: "2024-02-06T21:19:27.958512647Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 6e3dd82e3602f9e25beadfe0778d75208c585ff41da96d8783f931ac450dd8f8
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -123,7 +123,7 @@ entries:
     version: 0.0.21
   - apiVersion: v1
     appVersion: 0.0.13
-    created: "2024-02-05T22:38:46.421627762Z"
+    created: "2024-02-06T21:19:27.958206314Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 7cd5dde296cb7677477322892ea9c496897c5137969d41d4081e670f7188d02f
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -143,7 +143,7 @@ entries:
     version: 0.0.20
   - apiVersion: v1
     appVersion: 0.0.13
-    created: "2024-02-05T22:38:46.421308523Z"
+    created: "2024-02-06T21:19:27.957902666Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 3c6f7eb795c5f3ccccfca1d6c1d7002981733797944ed1c79b1dcf2b8d6f58d0
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -162,7 +162,7 @@ entries:
     version: 0.0.19
   - apiVersion: v1
     appVersion: 0.0.12
-    created: "2024-02-05T22:38:46.42102406Z"
+    created: "2024-02-06T21:19:27.957599028Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 1c6c332c2e77d685a56825a2c291748f05340a5485721dc8ebc237cd0446c9b0
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -181,7 +181,7 @@ entries:
     version: 0.0.18
   - apiVersion: v1
     appVersion: 0.0.12
-    created: "2024-02-05T22:38:46.420736911Z"
+    created: "2024-02-06T21:19:27.957307833Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 54274e6fd696088df766785885f7df34a2afbd80be30fbe2fb19afe9c08e7d9b
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -200,7 +200,7 @@ entries:
     version: 0.0.17
   - apiVersion: v1
     appVersion: 0.0.12
-    created: "2024-02-05T22:38:46.420461556Z"
+    created: "2024-02-06T21:19:27.957014985Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: ea1facdfcdf815e87efd359ea868bbaefa467f9d1127d7e2ffd214afa6a69d5d
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -219,7 +219,7 @@ entries:
     version: 0.0.16
   - apiVersion: v1
     appVersion: 0.0.11
-    created: "2024-02-05T22:38:46.420156954Z"
+    created: "2024-02-06T21:19:27.9567292Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 37bfb9df9e165f19b835b8a362abcc42077cccf858a6dce44f50aa38df0fe3bb
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -238,7 +238,7 @@ entries:
     version: 0.0.15
   - apiVersion: v1
     appVersion: 0.0.10.c3894b9
-    created: "2024-02-05T22:38:46.41985631Z"
+    created: "2024-02-06T21:19:27.956428758Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 51d72cfcd66083241dd7902583b3c76f4d0373da0af2437f59198983375801d4
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -257,7 +257,7 @@ entries:
     version: 0.0.13
   - apiVersion: v1
     appVersion: 0.0.9.c3894b9
-    created: "2024-02-05T22:38:46.419564443Z"
+    created: "2024-02-06T21:19:27.956084764Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 55d602b7c373acac7f90251252330f71dbc47ed378e83ea1afb9a3c7d9d51f0c
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -276,7 +276,7 @@ entries:
     version: 0.0.12
   - apiVersion: v1
     appVersion: 0.0.9.c3894b9
-    created: "2024-02-05T22:38:46.41925879Z"
+    created: "2024-02-06T21:19:27.955777449Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 371b9b633fb064eabcc1f43ab1bf0d6ceb97dec1c629e49365e83c2b2e74b834
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -295,7 +295,7 @@ entries:
     version: 0.0.11
   - apiVersion: v1
     appVersion: 0.0.9.c3894b9
-    created: "2024-02-05T22:38:46.418935673Z"
+    created: "2024-02-06T21:19:27.955467369Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: 107ca3f0b2bf8f4448c9a9a073d747007f5f9d24c6aaec2873dc89534275e484
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -314,7 +314,7 @@ entries:
     version: 0.0.10
   - apiVersion: v1
     appVersion: 0.0.9.c3894b9
-    created: "2024-02-05T22:38:46.424689068Z"
+    created: "2024-02-06T21:19:27.961681297Z"
     description: A Helm chart to deploy cloudzero-cloudwatch-metrics project
     digest: a19b35911b97a851b98d5e14200d38826d46b502acbff0e38f31759258463d4c
     home: https://cloudzero.github.io/cloudzero-k8s-charts/
@@ -332,4 +332,4 @@ entries:
     urls:
     - https://cloudzero.github.io/cloudzero-k8s-charts/cloudzero-cloudwatch-metrics-0.0.9.tgz
     version: 0.0.9
-generated: "2024-02-05T22:38:46.418427242Z"
+generated: "2024-02-06T21:19:27.954978124Z"
