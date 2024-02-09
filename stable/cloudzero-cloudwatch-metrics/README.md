@@ -27,7 +27,11 @@ helm upgrade --install cloudzero-cloudwatch-metrics           \
              --set clusterName=<Your Cluster>
 ```
 
-> Note: these are helm3 commands that creates a namespace for this deployment or you can use an existing namespace.
+> Note: these are helm3 commands that creates a namespace for this deployment; you can also use an existing namespace.
+
+### Sampling Frequency
+
+ By default, the agent queries and pushes metrics every `120` seconds. This is a granular enough sampling rate to get usable metrics while keeping costs low. The potential downside is that very short lived pods will not be sampled if they are launched and terminated between sampling times. If sampling short-lived pods is desirable, the agent can be configured to record samples at shorter intervals by updating the `metricsCollectionInterval` value to one of the allowed values. **Please be aware that an increased sampling rate will cause an increase in cost, as well as increased load on the kube API**.
 
 ## Configuration
 
