@@ -35,6 +35,8 @@ tolerations:
 # Allow CloudZero agent to run on all nodes in case of a taint
   - effect: NoSchedule
     operator: Exists
+  - effect: NoExecute
+    operator: Exists
 
 affinity: {}
 
