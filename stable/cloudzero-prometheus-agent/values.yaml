@@ -1,10 +1,8 @@
 cloudzeroHost: api.cloudzero.com
 
 credentials:
-  useSecret: true
-  createSecret: true
-  # useSecret: false
-  # createSecret: false
+  useSecret: false
+  createSecret: false
   secretName: &secretName cz-api-key
 
 
