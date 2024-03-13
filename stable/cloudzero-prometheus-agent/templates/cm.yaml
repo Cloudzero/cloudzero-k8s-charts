@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-{{.Values.prometheus.server.configMapOverrideName}}
+  namespace: default
+data:
+  prometheus.yml: |-
+    global:
+      scrape_interval: 60s
+    scrape_configs:
+      - job_name: 'cz-kubernetes-nodes'
+        kubernetes_sd_configs:
+          - role: node
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - source_labels: [__meta_kubernetes_node_name]
+            action: replace
+            target_label: node
+          - source_labels: [__address__]
+            target_label: __address__
+            regex: (.*)
+            replacement: $1:9100
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - source_labels: [__meta_kubernetes_node_name]
+            action: replace
+            target_label: kubernetes_node_name
+        metrics_path: /metrics
+        honor_labels: true
+        scheme: http
+        params:
+          format: ['prometheus']
+      - job_name: 'cz-kubernetes-pods'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_container_name]
+            action: keep
+            regex: '.*'
+            target_label: container
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+            replacement: $1
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            target_label: __address__
+            regex: (.+)
+            replacement: ${1}
+          - action: labelmap
+            regex: __meta_kubernetes_pod_label_(.+)
+        metrics_path: /metrics
+        honor_labels: true
+        scheme: http
+        params:
+          format: ['prometheus']
+    remote_write:
+      - url: 'https://{{ .Values.cloudzeroHost }}/v1/container-metrics?cluster_name={{.Values.cluster_name}}&cloud_account_id={{.Values.cloud_account_id}}'
+        authorization:
+          {{- if .Values.credentials.useSecret }}
+          credentials_file: /etc/config/cz-api-key
+          {{- else if .Values.api_key }}
+          credentials: '{{ .Values.api_key }}'
+          {{- else }}
+          {{- fail "api_key must be provided if API key is not provided by an existing secret" }}
+          {{- end }}
+        write_relabel_configs:
+          - source_labels: [__name__]
+            regex: "^(container_cpu_usage_seconds_total|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|kube_node_status_capacity|kube_pod_container_resource_limits|kube_pod_container_resource_requests|kube_pod_labels|kube_pod_info|node_dmi_info|kube_node_info)$"
+            action: keep
+        metadata_config:
+          send: false
+

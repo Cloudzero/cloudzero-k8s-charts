@@ -1,0 +1,31 @@
+cloudzeroHost: api.cloudzero.com
+
+credentials:
+  useSecret: true
+  createSecret: true
+  # useSecret: false
+  # createSecret: false
+  secretName: &secretName cz-api-key
+
+
+prometheus:
+  enabled: true
+  alertmanager:
+    enabled: false
+  serverFiles:
+    prometheus.yml:
+      rule_files:
+  server:
+    configMapOverrideName: configuration
+    defaultFlagsOverride:
+      - --config.file=/etc/config/prometheus.yml
+      - --web.enable-lifecycle
+      - --web.console.libraries=/etc/prometheus/console_libraries
+      - --web.console.templates=/etc/prometheus/consoles
+      - --enable-feature=agent
+    extraSecretMounts:
+      - name:  *secretName
+        mountPath: /etc/config/
+        subPath: ""
+        secretName: *secretName
+        readOnly: true
