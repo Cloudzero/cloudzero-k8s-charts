@@ -21,3 +21,4 @@ build/
 *.iml
 
 erase.yaml
+Chart.lock
